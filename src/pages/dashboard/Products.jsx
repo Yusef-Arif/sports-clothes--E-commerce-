@@ -7,8 +7,9 @@ import Spinner from "../../components/Spinner";
 
 const Products = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.products.products);
+  const products = useSelector((state) => state.products.currentProducts);
   const loading = useSelector((state) => state.products.isLoading);
+  // const {}
   const [view, setView] = useState(false);
   const [viewData, setViewData] = useState({});
   console.log(products);

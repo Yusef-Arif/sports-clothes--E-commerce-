@@ -5,6 +5,10 @@ import Details from "../../components/dashboard/Details";
 
 const Dashboard = () => {
   const [active, setActive] = useState();
+  const [slide, setSlide] = useState(true);
+  const handleSlide = () => {
+    setSlide(!slide);
+  };
   const location = useLocation();
   useEffect(() => {
     const index = buttons.findIndex(
@@ -30,9 +34,9 @@ const Dashboard = () => {
   }]
   return (
     <section>
-      <DashboardHeader />
+      <DashboardHeader handleSlide={() => handleSlide()} />
       <div className="flex min-h-[88vh]">
-        <div className="flex flex-col gap-5 w-[20%] bg-white p-5 border-r-2 border-gray-200">
+        <div className={`flex flex-col gap-5 ${slide?"w-[20%]":"w-[fit-content]"}  bg-white p-5 border-r-2 border-gray-200`}>
           {buttons.map((button, index) => (
             <Link
               onClick={() => setActive(index)}
@@ -43,7 +47,7 @@ const Dashboard = () => {
               }`}
             >
               <i className={`${button.icon} mr-2`}></i>
-              <span className="">{button.name}</span>
+              <span className={`${slide? '':"hidden"}`}>{button.name}</span>
             </Link>
           ))}
         </div>

@@ -1,10 +1,17 @@
 import { useEffect } from "react";
-import FormInput from "./FormInput";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllCategories } from "../api/products";
 import FormValidator from "./FormValidator";
+import CustomeInput from "./CustomeInput";
 
-const ProductForms = ({ use, handleSubmit, setFormData,formData,error,validateErrors }) => {
+const ProductForms = ({
+  use,
+  handleSubmit,
+  setFormData,
+  formData,
+  error,
+  validateErrors,
+}) => {
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.products.categories);
   const handleChange = (name, value) => {
@@ -14,7 +21,7 @@ const ProductForms = ({ use, handleSubmit, setFormData,formData,error,validateEr
         name === "images" ? value.split(",").map((img) => img.trim()) : value,
     }));
   };
-//for getting the categories for the select
+  //for getting the categories for the select
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
@@ -24,36 +31,33 @@ const ProductForms = ({ use, handleSubmit, setFormData,formData,error,validateEr
       <h1 className="relative text-3xl font-bold pl-2 mb-7 dark:text-primary-txt-dark">
         {use} Product
       </h1>
-      <form onSubmit={handleSubmit} className="ml-3">
-        <FormInput
-          label="Title"
-          type="text"
-          name="title"
-          onChange={handleChange}
-          value={formData.title}
-        />
-        <FormValidator error={validateErrors?.title} />
-        <FormInput
-          label="Description"
+      <form onSubmit={handleSubmit} className="ml-3 lg:max-w-[40%]">
+          <CustomeInput
+            text="Title"
+            type="text"
+            name="title"
+            onChange={handleChange}
+            value={formData.title}
+          />
+          <FormValidator error={validateErrors?.title} />
+        <CustomeInput
+          text="Description"
           type="text"
           name="description"
           onChange={handleChange}
           value={formData.description}
         />
         <FormValidator error={validateErrors?.description} />
-        <FormInput
-          label="Price"
+        <CustomeInput
+          text="Price"
           type="number"
           name="price"
           onChange={handleChange}
           value={formData.price}
         />
         <FormValidator error={validateErrors?.price} />
-        <div className="flex flex-col mt-6 mb-1 gap-2 max-w-[50%]">
-          <label
-            htmlFor="categories"
-            className="text-xl font-medium text-main"
-          >
+        <div className="flex flex-col my-3 gap-2 max-w-[50%]">
+          <label htmlFor="categories" className="text-xl font-medium text-main">
             Categories
           </label>
           <select
@@ -79,8 +83,8 @@ const ProductForms = ({ use, handleSubmit, setFormData,formData,error,validateEr
           </select>
         </div>
         <FormValidator error={validateErrors?.categoryId} />
-        <FormInput
-          label="Image URL"
+        <CustomeInput
+          text="Image URL"
           type="text"
           name="images"
           onChange={handleChange}
@@ -96,7 +100,9 @@ const ProductForms = ({ use, handleSubmit, setFormData,formData,error,validateEr
         >
           {use === "Create" ? "Create" : "Edit"} a product
         </button>
-        {error && <p className="text-red-500 mt-2">Oops, Something Went Wrong</p>}
+        {error && (
+          <p className="text-red-500 mt-2">Oops, Something Went Wrong</p>
+        )}
       </form>
     </div>
   );

@@ -22,3 +22,7 @@
   width: 150px;
   border: 7px solid #000000;
 }
+
+input:focus ~ .text-input{
+  @apply transform -translate-y-6.5 text-main bg-graybg px-2 z-10;
+}
