@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+
+@theme {
+  --color-main: #000000;
+  --color-graybg:#F0F0F0;
+  --color-shadowbg: #00000025;
+  /* --color-gray: #868686;
+  --color-third-txt: #feaf00;
+  --color-primary-bg: #fff;
+  --color-secondary-bg: #f8f8f8;
+  --color-third-bg: #ececec;
+  --color-primary-btn-bg: #feaf00; */
+}
+
+.hero::before{
+  content: "";
+  position: absolute;
+  bottom: -67px;
+  left: -97px;
+  height: 141px;
+  width: 150px;
+  border: 7px solid #000000;
+}
