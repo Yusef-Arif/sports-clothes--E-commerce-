@@ -2,11 +2,10 @@ import Button from "./Button";
 import CustomeInput from "./CustomeInput";
 import { useNavigate } from "react-router-dom";
 
-const Registration = ({ type, setData, handleOnSubmit }) => {
+const Registration = ({ type, setData, handleOnSubmit,error}) => {
   const navigate = useNavigate();
 
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
+  const handleOnChange = (name,value) => {
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -53,6 +52,11 @@ const Registration = ({ type, setData, handleOnSubmit }) => {
             <div className="flex justify-center items-center">
               <Button text={type} color="black" />
             </div>
+            {error && (
+              <p className="text-red-500 text-center mt-3">
+                {error}
+              </p>
+            )}
           </form>
         </div>
         <p className="text-gray-500 text-lg text-center">

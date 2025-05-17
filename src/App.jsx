@@ -9,6 +9,8 @@ import CreateProduct from "./pages/dashboard/CreateProduct";
 import EditProduct from "./pages/dashboard/EditProduct";
 import Login from "./pages/Login";
 import SignUp from "./pages/SginUp";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Error from "./pages/Erorr";
 
 function App() {
   function Layout() {
@@ -28,11 +30,20 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="*" element={<Error />} />
+
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<SignUp />} />
         </Route>
 
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute allow={["admin"]}>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
           <Route path="users" element={<Users />} />
           <Route path="products" element={<Products />} />
           <Route path="addproducts" element={<CreateProduct />} />
