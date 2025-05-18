@@ -11,6 +11,9 @@ import Login from "./pages/Login";
 import SignUp from "./pages/SginUp";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Error from "./pages/Erorr";
+import { ProtectRegistrationRoutes } from "./components/ProtectRegistrationRoutes";
+import ProductDetails from "./pages/ProductDetails";
+import ProductsPage from "./pages/ProductsPage";
 
 function App() {
   function Layout() {
@@ -30,10 +33,26 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
+          <Route path="products" element={<ProductsPage />} />
+          <Route path="productDetails" element={<ProductDetails />} />
           <Route path="*" element={<Error />} />
 
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<SignUp />} />
+          <Route
+            path="login"
+            element={
+              <ProtectRegistrationRoutes>
+                <Login />
+              </ProtectRegistrationRoutes>
+            }
+          />
+          <Route
+            path="signup"
+            element={
+              <ProtectRegistrationRoutes>
+                <SignUp />
+              </ProtectRegistrationRoutes>
+            }
+          />
         </Route>
 
         <Route

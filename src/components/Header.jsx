@@ -69,7 +69,7 @@ const Header = () => {
           <div className="flex items-center gap-5 relative">
             <i className="fa-solid fa-cart-shopping  fa-2xl cursor-pointer"></i>
             <i
-              className="fa-solid fa-user fa-2xl cursor-pointer"
+              className={`fa-solid fa-user fa-2xl cursor-pointer`}
               onClick={handleClick}
             ></i>
             {user && active && (

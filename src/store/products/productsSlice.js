@@ -4,6 +4,7 @@ import {
   deleteProduct,
   getAllCategories,
   getAllProducts,
+  getFilterProducts,
   getProductByID,
   updateProduct,
 } from "../../api/products";
@@ -11,6 +12,7 @@ import {
 const initialState = {
   products: [],
   currentProducts: [],
+  filterProducts:[],
   categories: [],
   product: {},
   isLoading: false,
@@ -27,6 +29,10 @@ export const productsSlice = createSlice({
         state.isLoading = false;
         state.currentProducts = action.payload;
         state.products = action.payload;
+      })
+      .addCase(getFilterProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.filterProducts = action.payload;
       })
       .addCase(getProductByID.fulfilled, (state, action) => {
         state.isLoading = false;

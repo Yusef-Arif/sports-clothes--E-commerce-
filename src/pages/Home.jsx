@@ -10,10 +10,13 @@ const Home = () => {
       <Hero />
       <Insurance />
       <div className="my-[10%]">
-        <HomeProductsSections section="NEW ARRIVALES" />
+        <HomeProductsSections
+          section="NEW ARRIVALES"
+          query="offset=0&limit=8"
+        />
       </div>
       <div className="my-[10%]">
-        <HomeProductsSections section="TOP SELLING" />
+        <HomeProductsSections section="TOP SELLING" query="offset=8&limit=8" />
       </div>
       <Categories />
       <div className="mt-[5%] mb-[10%]">

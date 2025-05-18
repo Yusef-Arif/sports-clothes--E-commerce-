@@ -1,24 +1,21 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getProfile } from "../api/auth";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 export const ProtectRegistrationRoutes = ({ children }) => {
-  const dispatch = useDispatch();
-  const { user, accessToken } = useSelector((state) => state.auth);
   const navigate = useNavigate();
-
+  const [checked, setChecked] = useState(false);
   useEffect(() => {
-    if (accessToken && !user) {
-      dispatch(getProfile());
-    }
-  }, [dispatch, accessToken, user]);
+    const token = Cookies.get("accessToken");
 
-  useEffect(() => {
-    if (accessToken) {
+    if (token) {
       navigate("/");
+    } else {
+      setChecked(true);
     }
-  }, [accessToken, navigate]);
+  }, [navigate]);
+
+  if (!checked) return null;
 
   return children;
 };

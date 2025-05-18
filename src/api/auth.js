@@ -24,7 +24,9 @@ export const getProfile = createAsyncThunk(
       const res = await api.get("/auth/profile", {
         headers: { Authorization: `Bearer ${token}` },
       });
+      // console.log(res.data);
       return res.data;
+      
     } catch (err) {
       return rejectWithValue(
         err.response?.data?.message || "Failed to fetch profile"

@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllUsers, getUserByID } from "../../api/users";
+import {
+  checkEmailAvailability,
+  createNewUser,
+  getAllUsers,
+  getUserByID,
+} from "../../api/users";
 
 const userSlice = createSlice({
   name: "users",
@@ -8,6 +13,7 @@ const userSlice = createSlice({
     currentUser: {},
     isLoading: false,
     error: null,
+    isAvailable: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -19,6 +25,14 @@ const userSlice = createSlice({
       .addCase(getUserByID.fulfilled, (state, action) => {
         state.isLoading = false;
         state.currentUser = action.payload;
+      })
+      .addCase(createNewUser.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.currentUser = action.payload;
+      })
+      .addCase(checkEmailAvailability.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isAvailable = action.payload;
       })
       .addMatcher(
         (action) => action.type.endsWith("pending"),

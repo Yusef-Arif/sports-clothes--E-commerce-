@@ -4,7 +4,7 @@ import axios from "axios";
 
 export const getAllProducts = createAsyncThunk(
   "products/getAllProducts",
-  async (API, ThunkAPI) => {
+  async (API = "https://api.escuelajs.co/api/v1/products", ThunkAPI) => {
     const { rejectWithValue } = ThunkAPI;
     try {
       const res = await axios.get(API);
@@ -80,6 +80,21 @@ export const getAllCategories = createAsyncThunk(
     const { rejectWithValue } = ThunkAPI;
     try {
       const res = await axios.get("https://api.escuelajs.co/api/v1/categories");
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err?.response?.data?.message);
+    }
+  }
+);
+
+export const getFilterProducts = createAsyncThunk(
+  "products/getFilterProducts",
+  async (query, ThunkAPI) => {
+    const { rejectWithValue } = ThunkAPI;
+    try {
+      const res = await axios.get(
+        `https://api.escuelajs.co/api/v1/products/?${query}`
+      );
       return res.data;
     } catch (err) {
       return rejectWithValue(err?.response?.data?.message);

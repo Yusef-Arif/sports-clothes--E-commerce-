@@ -27,18 +27,26 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.accessToken = action.payload.access_token;
         state.refreshToken = action.payload.refresh_token;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(getProfile.fulfilled, (state, action) => {
         state.user = action.payload;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(refreshAccessToken.fulfilled, (state, action) => {
         state.accessToken = action.payload.access_token;
         state.refreshToken = action.payload.refresh_token;
+        state.loading = false;
+        state.error = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
         state.accessToken = null;
         state.refreshToken = null;
+        state.loading = false;
+        state.error = null;
       })
       .addMatcher(
         (action) =>
@@ -57,14 +65,6 @@ const authSlice = createSlice({
             action.payload || action.error?.message || "An error occurred";
         }
       )
-      .addMatcher(
-        (action) =>
-          action.type.startsWith("auth/") && action.type.endsWith("/fulfilled"),
-        (state) => {
-          state.loading = false;
-          state.error = null;
-        }
-      );
   },
 });
 

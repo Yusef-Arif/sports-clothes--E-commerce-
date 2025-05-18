@@ -1,49 +1,31 @@
-import { productImage } from "../assets";
+import { useDispatch } from "react-redux";
 import Button from "./Button";
-import Rating from "./Rating";
+import ProductCard from "./ProductCard";
+import { useEffect, useState } from "react";
+import { getFilterProducts } from "../api/products";
 
-const HomeProductsSections = ({section}) => {
-  const data = [
-    {
-      id: 1,
-      name: "Product 1",
-      price: 100,
-      image: productImage,
-      rate: 2.5,
-    },
-    {
-      id: 2,
-      name: "Product 2",
-      price: 200,
-      image: productImage,
-      rate: 4.5,
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      price: 300,
-      image: productImage,
-      rate: 4.5,
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      price: 400,
-      image: productImage,
-      rate: 1.5,
-    },
-  ];
+const HomeProductsSections = ({ section, query }) => {
+  const dispatch = useDispatch();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    dispatch(getFilterProducts(query))
+      .unwrap()
+      .then((products) => setProducts(products))
+      .catch((error) => {
+        console.error("some thing went wrong:", error);
+      });
+  }, [dispatch, query]);
+  
+
   return (
     <section>
       <div className="container mx-auto">
         <h1 className="text-4xl font-extrabold text-center my-10">{section}</h1>
         <div className="grid grid-cols-4 gap-3">
-          {data.map((item) => (
+          {products.map((item) => (
             <div key={item.id} className=" p-4">
-              <img src={item.image} alt={item.name} className="rounded-2xl" />
-              <h2 className="text-xl font-semibold">{item.name}</h2>
-              <Rating rate={item.rate} />
-              <p className="text-lg font-bold">${item.price}</p>
+              <ProductCard product={item} />
             </div>
           ))}
         </div>
