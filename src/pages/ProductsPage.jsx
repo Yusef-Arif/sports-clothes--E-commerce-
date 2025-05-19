@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts, getFilterProducts } from "../api/products";
 import ProductCard from "../components/ProductCard";
-import Filter from "../components/filter";
+import Filter from "../components/Filter";
 import useNavigateWithScroll from "../hooks/useNavigateWithScroll";
 import usePagination from "../hooks/usePagination";
 import Spinner from "../components/Spinner";
