@@ -22,9 +22,10 @@ const Hero = () => {
           </div>
         </div>
         <div className="w-full md:w-1/2 flex justify-center mt-8 md:mt-12 relative">
-          <div className="border-4 border-main rounded-lg overflow-hidden relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[400px]">
+          <div className="border-[7px] border-main relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-[400px]">
             <img src={hero} alt="Hero" className="w-full h-auto object-cover" />
-            <div className="hero absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-50"></div>
+            <div className=" absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-black opacity-70"></div>
+            <div className="hero"></div>
           </div>
         </div>
       </div>
