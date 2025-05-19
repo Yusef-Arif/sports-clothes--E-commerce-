@@ -6,6 +6,7 @@ import {
   getAllProducts,
   getFilterProducts,
   getProductByID,
+  searchedProducts,
   updateProduct,
 } from "../../api/products";
 
@@ -15,6 +16,7 @@ const initialState = {
   filterProducts:[],
   categories: [],
   product: {},
+  search:[],
   isLoading: false,
   error: null,
 };
@@ -34,6 +36,10 @@ export const productsSlice = createSlice({
         state.isLoading = false;
         state.filterProducts = action.payload;
       })
+      .addCase(searchedProducts.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.search = action.payload;
+      })
       .addCase(getProductByID.fulfilled, (state, action) => {
         state.isLoading = false;
         state.product = action.payload;
@@ -45,8 +51,13 @@ export const productsSlice = createSlice({
         );
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        console.log(action.payload.id);
         state.currentProducts = state.currentProducts.filter(
+          (product) => product.id !== action.payload.id
+        );
+        state.products = state.products.filter(
+          (product) => product.id !== action.payload.id
+        );
+        state.filterProducts = state.filterProducts.filter(
           (product) => product.id !== action.payload.id
         );
         state.isLoading = false;

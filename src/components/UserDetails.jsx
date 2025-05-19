@@ -3,6 +3,7 @@ import { logout } from "../store/auth/authSlice";
 import Spinner from "./Spinner";
 import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const UserDetails = ({ data, setAuth, loading, dashboard }) => {
   const dispatch = useDispatch();
@@ -11,6 +12,7 @@ const UserDetails = ({ data, setAuth, loading, dashboard }) => {
     try {
       await dispatch(logout()).unwrap();
       setAuth(false);
+      toast.success("Logout successfully");
     } catch (error) {
       console.error("Logout failed:", error);
     }

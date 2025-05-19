@@ -5,6 +5,7 @@ import { createNewProduct } from "../../api/products";
 import { useNavigate } from "react-router";
 import Spinner from "../../components/Spinner";
 import useProductFormValidation from "../../hooks/useProductFormValidation";
+import toast from "react-hot-toast";
 
 export default function CreateProduct() {
   const dispatch = useDispatch();
@@ -25,7 +26,10 @@ export default function CreateProduct() {
     if (isValide) {
       dispatch(createNewProduct(formData))
         .unwrap()
-        .then(() => navigate("/dashboard/products"))
+        .then(() => {
+          toast.success("Product created successfully");
+          navigate("/dashboard/products");
+        })
         .catch((err) => {
           console.error("Error creating product:", err);
         });

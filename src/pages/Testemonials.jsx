@@ -59,12 +59,12 @@ const Testemonials = () => {
 
   return (
     <section>
-      <div className="container mx-auto bg-white p-5 rounded-3xl">
-        <div className="flex justify-between items-center">
-          <h1 className="text-4xl font-extrabold text-start my-10">
+      <div className="container mx-auto bg-white p-4 sm:p-5 rounded-3xl">
+        <div className="flex flex-col sm:flex-row justify-between items-center">
+          <h1 className="text-2xl sm:text-4xl font-extrabold text-start my-6 sm:my-10">
             What Our Customers Say
           </h1>
-          <div className="flex justify-between items-center gap-3">
+          <div className="flex justify-between items-center gap-3 mb-4 sm:mb-0">
             <i
               className="fa-solid fa-left-long fa-2xl cursor-pointer"
               onClick={handlePrev}
@@ -75,16 +75,16 @@ const Testemonials = () => {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
           {cuurentDesplay.map((item, index) => (
             <div
               key={index}
               className="flex flex-col items-start p-5 bg-graybg rounded-3xl"
             >
               <div className="my-2">
-                <i class={item.image}></i>
+                <i className={item.image}></i>
               </div>
-              <h2 className="text-xl font-bold text-center mt-2">
+              <h2 className="text-lg sm:text-xl font-bold text-center mt-2">
                 {item.name}
               </h2>
               <Rating rate={item.rate} />

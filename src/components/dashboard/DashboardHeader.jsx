@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getProfile } from "../../api/auth";
 import Cookies from "js-cookie";
 import UserDetails from "../UserDetails";
+import Search from "./Search";
 
 const DashboardHeader = ({ handleSlide }) => {
   const navigate = useNavigate();
@@ -13,11 +14,10 @@ const DashboardHeader = ({ handleSlide }) => {
 
   useEffect(() => {
     dispatch(getProfile());
-  }, []);
+  }, [dispatch]);
 
   const handleClick = async () => {
     const token = Cookies.get("accessToken");
-
     if (token) {
       if (!user) {
         await dispatch(getProfile()).unwrap();
@@ -29,36 +29,43 @@ const DashboardHeader = ({ handleSlide }) => {
     <header className="shadow-md z-10">
       <div className="container mx-auto flex justify-between items-center bg-white p-5">
         <div className="flex items-center gap-5">
-          <Link to={"/dashboard"}>
+          <div
+            className="cursor-pointer"
+            onClick={() => navigate("/dashboard")}
+          >
             <h1 className="text-3xl font-bold">Dashboard</h1>
-          </Link>
+          </div>
+          {/* Hamburger only on mobile */}
           <i
-            class="fa-solid fa-bars fa-2xl cursor-pointer"
-            onClick={() => handleSlide()}
+            className="fa-solid fa-bars fa-2xl cursor-pointer block md:hidden"
+            onClick={handleSlide}
           ></i>
         </div>
-        <div className="flex items-center gap-2 bg-graybg p-3 rounded-xl">
-          <i className="fa-solid fa-magnifying-glass"></i>
-          <input
-            type="text"
-            className="border-none outline-none pr-6"
-            placeholder="Search for products..."
-          />
+        <div className="hidden md:block w-full max-w-md mx-5">
+          <Search />
         </div>
         <div className="flex items-center space-x-4">
           <i
-            class="fa-solid fa-house fa-2xl cursor-pointer"
+            className="fa-solid fa-house fa-2xl cursor-pointer"
             onClick={() => navigate("/")}
           ></i>
-
           <i
             className="fa-solid fa-user fa-2xl cursor-pointer"
             onClick={handleClick}
           ></i>
           {user && active && (
-            <UserDetails data={user} setAuth={setActive} loading={loading} dashboard />
+            <UserDetails
+              data={user}
+              setAuth={setActive}
+              loading={loading}
+              dashboard
+            />
           )}
         </div>
+      </div>
+      {/* Mobile search below nav */}
+      <div className="block md:hidden px-5 pb-3">
+        <Search />
       </div>
     </header>
   );

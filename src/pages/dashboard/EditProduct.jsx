@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router";
 import Spinner from "../../components/Spinner";
 import { getProductByID, updateProduct } from "../../api/products";
 import useProductFormValidation from "../../hooks/useProductFormValidation";
+import toast from "react-hot-toast";
 
 export default function EditProduct() {
   const dispatch = useDispatch();
@@ -12,7 +13,6 @@ export default function EditProduct() {
   const error = useSelector((state) => state.products.error);
   const product = useSelector((state) => state.products.product);
   const { productID } = useParams();
-  console.log(productID)
   const [formData, setFormData] = useState({
     id: "",
     title: "",
@@ -47,7 +47,10 @@ export default function EditProduct() {
     if (isValide) {
       dispatch(updateProduct(formData))
         .unwrap()
-        .then(() => navigate("/dashboard/products"))
+        .then(() => {
+          toast.success("Product updated successfully");
+          navigate("/dashboard/products");
+        })
         .catch((err) => {
           console.error("Error editing product:", err);
         });

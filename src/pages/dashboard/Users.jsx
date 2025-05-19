@@ -10,7 +10,6 @@ const Users = () => {
   const loading = useSelector((state) => state.users.isLoading);
   const [view, setView] = useState(false);
   const [viewData, setViewData] = useState({});
-  console.log(viewData)
 
   const handleView = (data) => {
     setView(!view);
@@ -73,7 +72,7 @@ const Users = () => {
                 </td>
                 <td className="p-7 flex gap-4 justify-center items-center">
                   <i
-                    class="fa-solid fa-eye fa-2xl text-green-300 cursor-pointer"
+                    className="fa-solid fa-eye fa-2xl text-green-300 cursor-pointer"
                     onClick={() => handleView(user)}
                   ></i>
                 </td>

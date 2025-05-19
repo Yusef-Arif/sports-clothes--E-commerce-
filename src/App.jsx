@@ -14,6 +14,7 @@ import Error from "./pages/Erorr";
 import { ProtectRegistrationRoutes } from "./components/ProtectRegistrationRoutes";
 import ProductDetails from "./pages/ProductDetails";
 import ProductsPage from "./pages/ProductsPage";
+import Cart from "./pages/Cart";
 
 function App() {
   function Layout() {
@@ -34,7 +35,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="products" element={<ProductsPage />} />
-          <Route path="productDetails" element={<ProductDetails />} />
+          <Route path="products/:id" element={<ProductDetails />} />
+          <Route path="cart" element={<Cart />} />
           <Route path="*" element={<Error />} />
 
           <Route

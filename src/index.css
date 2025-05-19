@@ -5,12 +5,26 @@
   --color-main: #000000;
   --color-graybg:#F0F0F0;
   --color-shadowbg: #00000025;
-  /* --color-gray: #868686;
-  --color-third-txt: #feaf00;
-  --color-primary-bg: #fff;
-  --color-secondary-bg: #f8f8f8;
-  --color-third-bg: #ececec;
-  --color-primary-btn-bg: #feaf00; */
+}
+
+html{
+  scroll-behavior: smooth;
+  scrollbar-color: #000 #fff;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff;
 }
 
 .hero::before{

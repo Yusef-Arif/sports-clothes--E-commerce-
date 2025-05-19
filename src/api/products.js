@@ -101,3 +101,17 @@ export const getFilterProducts = createAsyncThunk(
     }
   }
 );
+export const searchedProducts = createAsyncThunk(
+  "products/searchedProducts",
+  async (SearchValue, ThunkAPI) => {
+    const { rejectWithValue } = ThunkAPI;
+    try {
+      const res = await axios.get(
+        `https://api.escuelajs.co/api/v1/products/?title=${SearchValue}`
+      );
+      return res.data;
+    } catch (err) {
+      return rejectWithValue(err?.response?.data?.message);
+    }
+  }
+);

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/auth";
 import Spinner from "../components/Spinner";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await dispatch(loginUser(data)).unwrap();
+      toast.success("Login successfully");
       navigate("/");
     } catch (error) {
       setIsError(error.message || "check your email or password");
@@ -32,7 +34,7 @@ const Login = () => {
           <Spinner size="size-50" />
         </div>
       )}
-      <section className="h-screen flex justify-center items-center mb-7">
+      <section className="h-screen flex justify-center items-center mb-7 max-sm:p-5">
         <Registration
           type="Login"
           handleOnSubmit={handleOnSubmit}

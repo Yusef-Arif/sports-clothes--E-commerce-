@@ -5,6 +5,7 @@ import {  createNewUser } from "../api/users";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../api/auth";
 import Spinner from "../components/Spinner";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -33,6 +34,7 @@ const SignUp = () => {
         await dispatch(
           loginUser({ email: data.email, password: data.password })
         ).unwrap();
+        toast.success("Registration successfully");
         navigate("/");
       // }
     } catch (error) {
@@ -47,7 +49,7 @@ const SignUp = () => {
           <Spinner size="size-50" />
         </div>
       )}
-      <section className="h-screen flex justify-center items-center mb-7">
+      <section className="h-screen flex justify-center items-center mb-7  max-sm:p-5">
         <Registration
           type="Sign Up"
           setData={setData}

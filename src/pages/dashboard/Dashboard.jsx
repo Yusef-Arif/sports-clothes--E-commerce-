@@ -16,7 +16,6 @@ const Dashboard = () => {
     );
     setActive(index);
   }, [location.pathname]);
-  console.log(location.pathname);
   const buttons = [{
     name: "Users",
     icon: "fa-solid fa-users",
@@ -42,12 +41,12 @@ const Dashboard = () => {
               onClick={() => setActive(index)}
               key={index}
               to={button.link}
-              className={`"font-semibold text-xl bg-graybg p-5 rounded-2xl flex justify-start items-center hover:bg-shadowbg transition-all duration-300 ease-in-out ${
+              className={`"font-semibold text-xl max-sm:text-sm bg-graybg lg:p-5 max-sm:p-2 rounded-2xl flex justify-start items-center hover:bg-shadowbg transition-all duration-300 ease-in-out ${
                 active === index ? "bg-main text-white" : ""
               }`}
             >
-              <i className={`${button.icon} mr-2`}></i>
-              <span className={`${slide? '':"hidden"}`}>{button.name}</span>
+              <i className={`${button.icon} lg:mr-2`}></i>
+              <span className={`${slide? 'max-sm:hidden':"hidden"}`}>{button.name}</span>
             </Link>
           ))}
         </div>

@@ -24,9 +24,12 @@ const Insurance = () => {
 
   return (
     <div className="bg-main">
-      <div className="flex justify-between items-center p-7 container mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-y-6 md:gap-y-0 md:gap-x-4 p-5 md:p-7 container mx-auto">
         {text.map((item, index) => (
-          <div key={index} className="flex items-center gap-4 text-white">
+          <div
+            key={index}
+            className="flex items-center gap-4 text-white w-full md:w-auto justify-center"
+          >
             <i className={item.icon}></i>
             <div>
               <h1 className="font-bold">{item.title}</h1>
